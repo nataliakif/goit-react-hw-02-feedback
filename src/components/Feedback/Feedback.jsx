@@ -1,7 +1,7 @@
 import React from 'react';
-import Controls from '../Controls/Controls';
-import Dropdown from '../Dropdown/Dropdown';
-import styles from './Feedback.module.css';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
+import Statistics from '../Statistics/Statistics';
+import Section from '../Section/Section';
 
 class Feedback extends React.Component {
   state = {
@@ -29,25 +29,30 @@ class Feedback extends React.Component {
     const { good, neutral, bad } = this.state;
 
     return (
-      <div className={styles['Feedback']}>
-        <h2 className={styles['Feedback__title']}>Please leave feedback</h2>
-        <Controls
-          options={Object.keys(this.state)}
-          onLeaveFeedback={this.onLeaveFeedback}
-        />
-        <h2 className={styles['Feedback__title']}>Statistics</h2>
-        {!this.countTotalFeedback() ? (
-          <p>There is no feedback</p>
-        ) : (
-          <Dropdown
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            totalFeedback={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
+      <>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.onLeaveFeedback}
           />
+        </Section>
+
+        {!this.countTotalFeedback() ? (
+          <Section title="Statistics">
+            <p>There is no feedback</p>
+          </Section>
+        ) : (
+          <Section title="Statistics">
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              totalFeedback={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          </Section>
         )}
-      </div>
+      </>
     );
   }
 }

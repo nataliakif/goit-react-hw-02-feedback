@@ -1,5 +1,4 @@
 import Feedback from './Feedback/Feedback';
-import Controls from './Controls/Controls';
 
 export const App = () => {
   return (
@@ -7,7 +6,7 @@ export const App = () => {
       style={{
         height: '100vh',
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
         alignItems: 'center',
         color: '#010101',
       }}
